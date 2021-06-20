@@ -63,9 +63,9 @@ class CreatePoll extends Component {
     create(poll).then((data) => {
         
         if (data.error) {
-          this.setState({ ...this.state, error: data.error})
+          this.setState({error: data.error})
         } else {
-              this.setState({ ...this.state, error: '' ,open: true,id:data._id})
+              this.setState({error: '' ,open: true,id:data._id})
         }
     })
   }

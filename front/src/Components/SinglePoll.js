@@ -45,9 +45,9 @@ class Poll extends Component{
   {
     readone(this.props.match.params.pollId).then((polldata) => {
       if (polldata.error) {
-        this.setState({ ...this.state, error: polldata.error})
+        this.setState({error: polldata.error})
       } else {
-        this.setState({ ...this.state, poll: polldata})
+        this.setState({poll: polldata})
         c=0;
         this.setState({
           chart:{
@@ -71,9 +71,9 @@ class Poll extends Component{
   {
     readone(this.props.match.params.pollId).then((polldata) => {
       if (polldata.error) {
-        this.setState({ ...this.state, error: polldata.error})
+        this.setState({error: polldata.error})
       } else {
-        this.setState({ ...this.state, poll: polldata})
+        this.setState({poll: polldata})
         this.setState({
           chart:{
 
@@ -108,15 +108,15 @@ class Poll extends Component{
                     () => vote(this.state.poll._id, { answer: option.option })
                           .then((data)=>{
                             if(data.error)
-                              this.setState({ ...this.state, msg:'',error: data.error})
+                              this.setState({msg:'',error: data.error})
                             else
-                              this.setState({ ...this.state,error:'', msg: "Your Vote has been successfully recorded"})
+                              this.setState({error:'', msg: "Your Vote has been successfully recorded"})
                               c=0;
                               readone(this.props.match.params.pollId).then((polldata) => {
                                 if (polldata.error) {
-                                  this.setState({ ...this.state, error: polldata.error})
+                                  this.setState({error: polldata.error})
                                 } else {
-                                  this.setState({ ...this.state, poll: polldata})
+                                  this.setState({poll: polldata})
                                   this.setState({
                                     chart:{
                           

@@ -87,12 +87,12 @@ class Login extends Component {
           
           if (data.error) {
             
-            this.setState({ ...this.state, error: data.error})
+            this.setState({error: data.error})
             
           } else {
             
             auth.authenticate(data.token, () => {
-                this.setState({ ...this.state, error: '' ,open: true})
+                this.setState({error: '' ,open: true})
             })
           }
         })

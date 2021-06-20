@@ -95,11 +95,11 @@ class Register extends Component {
          
         create(user).then((data) => {
           if (data.error) {
-            this.setState({ ...this.state, error: data.error})
+            this.setState({error: data.error})
           } else {
 
             auth.authenticate(data.token, () => {
-                this.setState({ ...this.state, error: '' ,open: true})
+                this.setState({error: '' ,open: true})
             })
           }
         })
