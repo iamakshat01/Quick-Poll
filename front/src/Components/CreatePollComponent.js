@@ -56,7 +56,7 @@ class CreatePoll extends Component {
     e.preventDefault();
     const poll={
         "question":this.state.question,
-        "options":this.state.options.filter(option => {if(option!=='') return option}),
+        "options":this.state.options.filter(option => option!==''),
         
     }
    

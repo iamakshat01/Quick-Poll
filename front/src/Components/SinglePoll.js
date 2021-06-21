@@ -52,7 +52,7 @@ class Poll extends Component{
         this.setState({
           chart:{
 
-            labels: this.state.poll.options.map(option => {if(option.option!=='') return option.option}),
+            labels: this.state.poll.options.map(option => option.option),
             datasets: [
                 {
                   label: this.state.poll.question,
@@ -77,7 +77,7 @@ class Poll extends Component{
         this.setState({
           chart:{
 
-            labels: polldata.options.map(option => {if(option.option!=='') return option.option}),
+            labels: polldata.options.map(option => option.option),
             datasets: [
                 {
                   label: polldata.question,
@@ -120,7 +120,7 @@ class Poll extends Component{
                                   this.setState({
                                     chart:{
                           
-                                      labels: polldata.options.map(option => {if(option.option!=='') return option.option}),
+                                      labels: polldata.options.map(option => option.option),
                                       datasets: [
                                           {
                                             label: polldata.question,
