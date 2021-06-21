@@ -1,10 +1,5 @@
 # [Quick-Poll 🔗](https://quickpoll.netlify.app/home)
 
-<!-- ![Landing Page](./readme_assets/1.png) -->
-<!-- ![Navigation](./readme_assets/2.png)
-![Profile](./readme_assets/3.png)
-![Nav Menu](./readme_assets/4.png) -->
-
 <br/>
 
 # Project Description
@@ -61,7 +56,7 @@ Clone the frontend and backend repositories, cd into them individually, and then
 ## 2. Backend
 
 1. Run `npm install`.
-2. We used MongoDB Atlas for hosted database, you can have a local database if you want but we recommend using Atlas. If you are using Atlas replace your database link in keys.js file of backend.
+2. We used MongoDB Atlas for hosted database, you can have a local database if you want but we recommend using Atlas. If you are using Atlas replace your database link in env file of backend.
 3. Set your JWT secret in env file of backend.
 
 Run `npm start` in the Backend repo first and then `yarn start` in Frontend .
