@@ -21,25 +21,25 @@ class Polls extends Component {
     if(this.state.activeTab !== tab) 
         this.setState({
             activeTab:tab
-        })
+    })
   }
 
   componentDidMount() {
     
     read().then((data) => {
         if (data.error) {
-          this.setState({ ...this.state, error: data.error})
+          this.setState({error: data.error})
         } else {
 
-              this.setState({ ...this.state, userpolls: data })
+              this.setState({userpolls: data })
         }
     })
 
     readall().then((data) => {
         if (data.error) {
-          this.setState({ ...this.state, error: data.error})
+          this.setState({error: data.error})
         } else {
-              this.setState({ ...this.state, allpolls: data })
+          this.setState({allpolls: data })
         }
     })
 

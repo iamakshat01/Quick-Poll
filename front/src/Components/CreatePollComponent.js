@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import {Button,
     Form,
@@ -56,16 +56,16 @@ class CreatePoll extends Component {
     e.preventDefault();
     const poll={
         "question":this.state.question,
-        "options":this.state.options.filter(option => {if(option!='') return option}),
+        "options":this.state.options.filter(option => option!==''),
         
     }
    
     create(poll).then((data) => {
         
         if (data.error) {
-          this.setState({ ...this.state, error: data.error})
+          this.setState({error: data.error})
         } else {
-              this.setState({ ...this.state, error: '' ,open: true,id:data._id})
+              this.setState({error: '' ,open: true,id:data._id})
         }
     })
   }

@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const config=require('../config')
-mongoose.Promise = global.Promise;
-//console.log(config)
 
-
-mongoose.connect(config.database);
+mongoose.connect(process.env.DATABASE,{ 
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true 
+});
 
 module.exports.User = require('./user');
 module.exports.Poll = require('./poll');

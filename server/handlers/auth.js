@@ -1,6 +1,5 @@
 const db = require('../models');
 const jwt = require('jsonwebtoken');
-const config=require('../config')
 // for development only
 
 // getUsers
@@ -22,7 +21,7 @@ exports.register = async (req, res, next) => {
   try {
     const user = await db.User.create(req.body);
     const { id, username } = user;
-    const token = jwt.sign({ id, username }, config.SECRET);
+    const token = jwt.sign({ id, username }, process.env.SECRET);
 
     return res.status(201).json({
       id,
@@ -50,7 +49,7 @@ exports.login = async (req, res, next) => {
     const valid = await user.comparePassword(req.body.password);
 
     if (valid) {
-      const token = jwt.sign({ id, username }, config.SECRET);
+      const token = jwt.sign({ id, username }, process.env.SECRET);
       return res.status(200).json({
         id,
         username,

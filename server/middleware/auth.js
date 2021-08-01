@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
-const config=require('../config')
 
 
 module.exports = (req, res, next) => {
   if (req.headers['authorization']) {
     const token = req.headers['authorization'].split(' ')[1];
-    jwt.verify(token, config.SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
         next(Error('Please Sign In'));
       } else {
