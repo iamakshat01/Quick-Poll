@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { VictoryPie } from "victory";
 import {vote,readone} from '../api/api-poll';
 import {Alert, Button} from "reactstrap"
 import {
@@ -17,14 +17,7 @@ import {
 import config from '../config'
 
 var colset=["#ffa600","#d45087","#003f5c","#f95d6a","#ffa600"]
-var c=0;
-const color = () => {
-  c++;
-  c=c%4
-  return (
-    colset[c]
-  );
-};
+
 
 class Poll extends Component{
   
@@ -33,7 +26,6 @@ class Poll extends Component{
     super(props);
     this.state={
       poll:'',
-      chart:{},
       error:'',
       msg:'',
       view:''
@@ -48,21 +40,6 @@ class Poll extends Component{
         this.setState({error: polldata.error})
       } else {
         this.setState({poll: polldata})
-        c=0;
-        this.setState({
-          chart:{
-
-            labels: this.state.poll.options.map(option => option.option),
-            datasets: [
-                {
-                  label: this.state.poll.question,
-                  backgroundColor: this.state.poll.options.map(option => color()),
-                  borderColor: '#323643',
-                  data: this.state.poll.options.map(option => option.votes),
-                },
-              ],
-          }
-        }) 
       }
     })
     
@@ -74,20 +51,6 @@ class Poll extends Component{
         this.setState({error: polldata.error})
       } else {
         this.setState({poll: polldata})
-        this.setState({
-          chart:{
-
-            labels: polldata.options.map(option => option.option),
-            datasets: [
-                {
-                  label: polldata.question,
-                  backgroundColor: polldata.options.map(option => color()),
-                  borderColor: '#323643',
-                  data: polldata.options.map(option => option.votes),
-                },
-              ],
-          }
-        }) 
       }
     })
   }
@@ -111,30 +74,7 @@ class Poll extends Component{
                               this.setState({msg:'',error: data.error})
                             else
                               this.setState({error:'', msg: "Your Vote has been successfully recorded"})
-                              c=0;
-                              readone(this.props.match.params.pollId).then((polldata) => {
-                                if (polldata.error) {
-                                  this.setState({error: polldata.error})
-                                } else {
-                                  this.setState({poll: polldata})
-                                  this.setState({
-                                    chart:{
-                          
-                                      labels: polldata.options.map(option => option.option),
-                                      datasets: [
-                                          {
-                                            label: polldata.question,
-                                            backgroundColor: polldata.options.map(option => color()),
-                                            borderColor: '#323643',
-                                            data: polldata.options.map(option => option.votes),
-                                          },
-                                        ],
-                                    }
-                                  }) 
-                                }
-                              })
-
-
+                              this.refresh();
                           })
                 }
         className="btn-primary ml-3"
@@ -143,8 +83,7 @@ class Poll extends Component{
         {option.option}
       </Button>));
 
-      const response =
-      this.state.poll.options &&
+    const response = this.state.poll.options &&
       this.state.poll.options.map(option => (
         option.option && <Button
           className="btn-primary ml-3"
@@ -159,8 +98,11 @@ class Poll extends Component{
     return (
       <div className="container mt-5">
         {this.state.error && <Alert className="col-md-6 mx-auto" color="danger">{this.state.error.message}</Alert>}
+
         {this.state.msg && <Alert className="col-md-8 mx-auto" color="primary">{this.state.msg}</Alert>}
-          <h4 class="col-md-10 mx-auto"><Alert color="info">{this.state.poll.question}</Alert></h4>
+
+        <h4 class="col-md-10 mx-auto"><Alert color="info">{this.state.poll.question}</Alert></h4>
+
         <div className="buttons_center mt-4 mb-4">{answers}</div> 
 
         <div>
@@ -213,13 +155,31 @@ class Poll extends Component{
         <Button className="ml-2" onClick={this.refresh}><i class="fa fa-refresh" aria-hidden="true"></i></Button>
         {this.state.view && <div className="container mt-5">
           <div className="container mt-3 mb-3">{response}</div>
-          <Pie data={this.state.chart} /> 
+          <VictoryPie 
+            data={this.state.poll.options}
+            responsive={true}
+            startAngle={50}
+            endAngle={450}
+            height={300}
+            animate={{
+              duration: 2000
+            }}
+            colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
+            x={(data)=> data.votes>0?data.option:null}
+            y={(data)=> data.votes>0?data.votes:null} 
+            style={{ 
+              labels: { fill: "black", fontSize: 8, fontWeight: "bold" },
+              data: {
+                fillOpacity: 0.9, stroke: "#c43a31", strokeWidth: 1
+              }
+            }}
+            
+          /> 
         </div>}
-        
       </div>
     );
     
   }
 }
 
-export default (Poll);
+export default Poll;
