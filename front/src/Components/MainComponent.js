@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Polls from "./AllPolls";
 import CreatePoll from "./CreatePollComponent";
@@ -8,10 +8,8 @@ import Register from "./RegisterComponent";
 import Poll from "./SinglePoll";
 
 
-
-class Main extends Component {
+function Main() {
   
-  render() {
     return (
       <div>
         <Header/>
@@ -24,6 +22,6 @@ class Main extends Component {
         </Switch>
       </div>
     );
-  }
 }
+
 export default Main;

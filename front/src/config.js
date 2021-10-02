@@ -1,5 +1,5 @@
 const config = {
-    server: 'https://desolate-brook-82794.herokuapp.com',
+    server: 'http://localhost:3000',
     base: 'https://quickpoll.netlify.app',
     
 };
