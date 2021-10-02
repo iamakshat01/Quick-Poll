@@ -35,36 +35,36 @@ export default class Header extends React.Component {
       <Navbar color="dark" dark expand="md">
         
           <NavbarBrand className="ml-2" tag={Link} to="/">
-            <i class="fa fa-pie-chart" aria-hidden="true"></i> Quick Poll
+            <i className="fa fa-pie-chart" aria-hidden="true"></i> Quick Poll
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} className="border-0" />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar >
               <NavItem className="mx-md-3">
                 <NavLink tag={Link} to="/">
-                    <i class="fa fa-home"></i> Home
+                    <i className="fa fa-home"></i> Home
                 </NavLink>
               </NavItem>
               {!auth.isAuthenticated() && <NavItem className="mx-md-3">
                 <NavLink tag={Link} to="/login">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i> LogIn
+                    <i className="fa fa-sign-in" aria-hidden="true"></i> LogIn
                 </NavLink>
               </NavItem>}
               {!auth.isAuthenticated() && <NavItem className="mx-md-3">
                 <NavLink tag={Link} to="/register">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i> Register
+                    <i className="fa fa-sign-in" aria-hidden="true"></i> Register
                 </NavLink>
               </NavItem>}
 
               {auth.isAuthenticated() && <NavItem className="mx-md-3">
                 <Button outline color="warning" tag={Link} to="/createpoll">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Create Poll
+                    <i className="fa fa-plus" aria-hidden="true"></i> Create Poll
                 </Button>
               </NavItem>}
 
               {auth.isAuthenticated() && <NavItem className="mx-md-3">
                 <Button className="btn btn-outline-info" onClick={this.SignOut} >
-                  <i class="fa fa-sign-out" aria-hidden="true"></i> SignOut
+                  <i className="fa fa-sign-out" aria-hidden="true"></i> SignOut
                 </Button>
               </NavItem>}
 

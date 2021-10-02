@@ -108,7 +108,7 @@ class Poll extends Component{
 
         {this.state.msg && <Alert className="col-md-8 mx-auto" color="primary">{this.state.msg}</Alert>}
 
-        <h4 class="col-md-10 mx-auto"><Alert color="info">{this.state.poll.question}</Alert></h4>
+        <h4 className="col-md-10 mx-auto"><Alert color="info">{this.state.poll.question}</Alert></h4>
 
         <div className="buttons_center mt-4 mb-4">{answers}</div> 
 
@@ -161,7 +161,7 @@ class Poll extends Component{
 
         <Button onClick={this.answerclick}>View Results</Button>
 
-        <Button className="ml-2" onClick={this.refresh}><i class="fa fa-refresh" aria-hidden="true"></i></Button>
+        <Button className="ml-2" onClick={this.refresh}><i className="fa fa-refresh" aria-hidden="true"></i></Button>
 
 
         {this.state.view && <div className="container mt-5">

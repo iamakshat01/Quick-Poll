@@ -60,13 +60,13 @@ class Polls extends Component {
 
     const allpolls = this.state.allpolls.map(poll => (
       <li className=" list-group-item list-group-item-info" onClick={() => this.handleSelect(poll._id)} key={poll._id}>
-         <i class="fa fa-pie-chart" aria-hidden="true"></i> {poll.question} 
+         <i className="fa fa-pie-chart" aria-hidden="true"></i> {poll.question} 
       </li>
     ));
 
     const userpolls = this.state.userpolls.map(poll => (
         <li className=" list-group-item list-group-item-info" onClick={() => this.handleSelect(poll._id)} key={poll._id}>
-          <i class="fa fa-pie-chart" aria-hidden="true"></i> {poll.question}
+          <i className="fa fa-pie-chart" aria-hidden="true"></i> {poll.question}
         </li>
     ));
 
