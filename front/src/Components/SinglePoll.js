@@ -14,9 +14,9 @@ import {
   WhatsappShareButton,
   WhatsappIcon
 } from "react-share";
+
 import config from '../config'
 
-var colset=["#ffa600","#d45087","#003f5c","#f95d6a","#ffa600"]
 
 
 class Poll extends Component{
@@ -35,6 +35,7 @@ class Poll extends Component{
   }
   componentDidMount()
   {
+    // fetch a single poll  
     readone(this.props.match.params.pollId).then((polldata) => {
       if (polldata.error) {
         this.setState({error: polldata.error})
@@ -44,6 +45,8 @@ class Poll extends Component{
     })
     
   }
+  
+  // to refetch the data of poll
   refresh()
   {
     readone(this.props.match.params.pollId).then((polldata) => {
@@ -54,6 +57,8 @@ class Poll extends Component{
       }
     })
   }
+  
+  // submitting a vote
   answerclick()
   {
     this.setState({
@@ -61,27 +66,28 @@ class Poll extends Component{
       view:!this.state.view
     })
   }
+
   render()
   {
-    const answers =
-    this.state.poll.options &&
-    this.state.poll.options.map(option => (
-      option.option && <Button
-        onClick={ 
-                    () => vote(this.state.poll._id, { answer: option.option })
-                          .then((data)=>{
-                            if(data.error)
-                              this.setState({msg:'',error: data.error})
-                            else
-                              this.setState({error:'', msg: "Your Vote has been successfully recorded"})
-                              this.refresh();
-                          })
-                }
-        className="btn-primary ml-3"
-        color="warning"
-        key={option._id}>
-        {option.option}
-      </Button>));
+    const answers = this.state.poll.options &&
+      this.state.poll.options.map(option => (
+        option.option && <Button
+            onClick={ 
+                        () => vote(this.state.poll._id, { answer: option.option })
+                              .then((data)=>{
+                                if(data.error)
+                                  this.setState({msg:'',error: data.error})
+                                else
+                                  this.setState({error:'', msg: "Your Vote has been successfully recorded"})
+                                  this.refresh();
+                              })
+                    }
+            className="btn-primary ml-3"
+            color="warning"
+            key={option._id}>
+            {option.option}
+        </Button>
+      ));
 
     const response = this.state.poll.options &&
       this.state.poll.options.map(option => (
@@ -93,9 +99,10 @@ class Poll extends Component{
           <br></br>
           {option.votes}
         </Button>
-      ));
+    ));
 
     return (
+
       <div className="container mt-5">
         {this.state.error && <Alert className="col-md-6 mx-auto" color="danger">{this.state.error.message}</Alert>}
 
@@ -151,10 +158,16 @@ class Poll extends Component{
             </EmailShareButton>
           
         </div>
+
         <Button onClick={this.answerclick}>View Results</Button>
+
         <Button className="ml-2" onClick={this.refresh}><i class="fa fa-refresh" aria-hidden="true"></i></Button>
+
+
         {this.state.view && <div className="container mt-5">
+
           <div className="container mt-3 mb-3">{response}</div>
+
           <VictoryPie 
             data={this.state.poll.options}
             responsive={true}
@@ -174,7 +187,8 @@ class Poll extends Component{
               }
             }}
             
-          /> 
+          />
+           
         </div>}
       </div>
     );
