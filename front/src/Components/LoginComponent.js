@@ -44,7 +44,8 @@ class Login extends Component {
     }
 
     toggleModal() {
-      this.props.history.push('/');
+
+      window.location.href='/';
       this.setState({
         open: !this.state.open
       });
