@@ -4,7 +4,7 @@ const db = require('../models');
 exports.showPolls = async function (request, reply) {
   try {
 
-    const polls = await db.Poll.find().populate('user', ['username', 'id']);
+    const polls = await db.Poll.find().populate('user', ['username', 'id']).lean();
     return reply.code(200).send(polls);
 
   } catch (err) {
@@ -19,7 +19,7 @@ exports.usersPolls = async function(request, reply) {
   const { id } = request.user;
   try {
 
-    const user = await db.User.findById(id).populate('polls');
+    const user = await db.User.findById(id).populate('polls').lean();
 
     return reply.code(200).send(user.polls);
   } catch (err) {
@@ -33,12 +33,12 @@ exports.createPoll = async function (request, reply) {
   const { id } = request.user;
   const { question, options } = request.body;
   try {
-    const user = await db.User.findById(id);
+    const user = await db.User.findById(id).lean();
     const poll = await db.Poll.create({
       question,
       user,
       options: options.map(option => ({ option, votes: 0 })),
-    });
+    }).lean();
     user.polls.push(poll._id);
     await user.save();
 
@@ -59,7 +59,7 @@ exports.vote = async function (request, reply) {
   const { answer } = request.body;
   try {
     if (answer) {
-      const poll = await db.Poll.findById(pollId);
+      const poll = await db.Poll.findById(pollId).lean();
       if (!poll) throw new Error('No poll found');
 
       const vote = poll.options.map(
@@ -99,7 +99,7 @@ exports.getPoll = async function (request, reply) {
     const poll = await db.Poll.findById(id).populate('user', [
       'username',
       'id',
-    ]);
+    ]).lean();
     // .populate('voted', ['username', 'id']);
     if (!poll) throw new Error('No poll found');
 
@@ -116,14 +116,14 @@ exports.deletePoll = async function (request, reply) {
   const { id: pollId } = request.params;
   const { id: userId } = request.user;
   try {
-    let user = await db.User.findById(userId)
+    let user = await db.User.findById(userId).lean()
     if(user.polls) { 
       user.polls = user.polls.filter(userPoll => {
         return userPoll._id.toString() !== pollId.toString()
       })
     }
     
-    const poll = await db.Poll.findById(pollId);
+    const poll = await db.Poll.findById(pollId).lean();
     if (!poll) throw new Error('No poll found');
     
     if (poll.user.toString() !== userId) {
