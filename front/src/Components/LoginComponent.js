@@ -88,7 +88,7 @@ class Login extends Component {
           
           if (data.error) {
             
-            this.setState({error: data.error})
+            this.setState({error: data.message})
             
           } else {
             
@@ -108,8 +108,8 @@ class Login extends Component {
             <div className="container">
             <div className="row row-content">
                 <div className="col-12 col-md-9 mt-5">
-                { this.state.error.message && <Alert color="danger">
-                  {this.state.error.message}
+                { this.state.error && <Alert color="danger">
+                  {this.state.error}
                 </Alert>}
                 <Form onSubmit={this.handleSubmit} onChange={this.handleInputChange}>
 

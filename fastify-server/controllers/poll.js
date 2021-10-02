@@ -1,39 +1,37 @@
 const db = require('../models');
 
 // allPolls
-exports.showPolls = async (req, res, next) => {
+exports.showPolls = async function (request, reply) {
   try {
-    const polls = await db.Poll.find().populate('user', ['username', 'id']);
-    // .populate('voted', ['username', 'id']);
 
-    return res.status(200).json(polls);
+    const polls = await db.Poll.find().populate('user', ['username', 'id']);
+    return reply.code(200).send(polls);
+
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+
+    return reply.code(400).send(err);
+
   }
 };
 
 // userPolls
-exports.usersPolls = async (req, res, next) => {
-  const { id } = req.decoded;
+exports.usersPolls = async function(request, reply) {
+  const { id } = request.user;
   try {
+
     const user = await db.User.findById(id).populate('polls');
 
-    return res.status(200).json(user.polls);
+    return reply.code(200).send(user.polls);
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+
+    return reply.code(400).send(err);
   }
 };
 
 // creating Poll
-exports.createPoll = async (req, res, next) => {
-  const { id } = req.decoded;
-  const { question, options } = req.body;
+exports.createPoll = async function (request, reply) {
+  const { id } = request.user;
+  const { question, options } = request.body;
   try {
     const user = await db.User.findById(id);
     const poll = await db.Poll.create({
@@ -44,21 +42,21 @@ exports.createPoll = async (req, res, next) => {
     user.polls.push(poll._id);
     await user.save();
 
-    return res.status(201).json({ ...poll._doc, user: user._id });
+    return reply.code(201).send({ ...poll._doc, user: user._id });
+
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+
+    return reply.code(400).send(err);
+
   }
 };
 
 
 // vote for a poll
-exports.vote = async (req, res, next) => {
-  const { id: pollId } = req.params;
-  const { id: userId } = req.decoded;
-  const { answer } = req.body;
+exports.vote = async function (request, reply) {
+  const { id: pollId } = request.params;
+  const { id: userId } = request.user;
+  const { answer } = request.body;
   try {
     if (answer) {
       const poll = await db.Poll.findById(pollId);
@@ -80,7 +78,7 @@ exports.vote = async (req, res, next) => {
         poll.options = vote;
         await poll.save();
 
-        return res.status(202).json(poll);
+        return reply.code(202).send(poll);
       } else {
         throw new Error('Already voted');
       }
@@ -88,17 +86,16 @@ exports.vote = async (req, res, next) => {
       throw new Error('No Answer Provided');
     }
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+
+    return reply.code(400).send(err);
+
   }
 };
 
 // get speicific poll with pollId
-exports.getPoll = async (req, res, next) => {
+exports.getPoll = async function (request, reply) {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
     const poll = await db.Poll.findById(id).populate('user', [
       'username',
       'id',
@@ -106,19 +103,18 @@ exports.getPoll = async (req, res, next) => {
     // .populate('voted', ['username', 'id']);
     if (!poll) throw new Error('No poll found');
 
-    return res.status(200).json(poll);
+    return reply.code(200).send(poll);
+    
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+    return reply.code(400).send(err);
+
   }
 };
 
 // delete a specific poll with pollId
-exports.deletePoll = async (req, res, next) => {
-  const { id: pollId } = req.params;
-  const { id: userId } = req.decoded;
+exports.deletePoll = async function (request, reply) {
+  const { id: pollId } = request.params;
+  const { id: userId } = request.user;
   try {
     let user = await db.User.findById(userId)
     if(user.polls) { 
@@ -136,11 +132,10 @@ exports.deletePoll = async (req, res, next) => {
     
     await user.save()
     await poll.remove();
-    return res.status(202).json({ poll, deleted: true });
+    return reply.code(202).send({ poll, deleted: true });
+
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+
+    return reply.code(400).send(err);
   }
 };

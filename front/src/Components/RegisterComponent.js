@@ -95,7 +95,7 @@ class Register extends Component {
          
         create(user).then((data) => {
           if (data.error) {
-            this.setState({error: data.error})
+            this.setState({error: data.message})
           } else {
 
             auth.authenticate(data.token, () => {
@@ -114,7 +114,7 @@ class Register extends Component {
             <div className="row row-content">
                 <div className="col-12 col-md-9 mt-5">
                 { this.state.error && <Alert color="danger">
-                  {this.state.error.message}
+                  {this.state.error}
                 </Alert>}
                 <Form onSubmit={this.handleSubmit} onChange={this.handleInputChange}>
                     
