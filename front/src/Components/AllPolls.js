@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import { read, readall } from '../api/api-poll';
 import classnames from 'classnames';
+import auth from '../api/auth-helper';
 
 class Polls extends Component {
   constructor(props) {
@@ -26,15 +27,19 @@ class Polls extends Component {
 
   componentDidMount() {
     
-    read().then((data) => {
+    // fetch user polls only if user is signedIn
+    if(auth.isAuthenticated()) {
+      read().then((data) => {
         if (data.error) {
           this.setState({error: data.error})
         } else {
 
               this.setState({userpolls: data })
         }
-    })
-
+      })
+    }
+    
+    // fetch all polls from database
     readall().then((data) => {
         if (data.error) {
           this.setState({error: data.error})
@@ -76,14 +81,14 @@ class Polls extends Component {
                 All Polls
             </NavLink>
             </NavItem>
-            <NavItem className="ml-2">
+            {auth.isAuthenticated() && <NavItem className="ml-2">
             <NavLink
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }}
             >
                 Your Polls
             </NavLink>
-            </NavItem>
+            </NavItem>}
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
