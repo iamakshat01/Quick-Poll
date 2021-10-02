@@ -31,7 +31,7 @@ class Polls extends Component {
     if(auth.isAuthenticated()) {
       read().then((data) => {
         if (data.error) {
-          this.setState({error: data.error})
+          this.setState({error: data.message})
         } else {
 
               this.setState({userpolls: data })
@@ -42,7 +42,7 @@ class Polls extends Component {
     // fetch all polls from database
     readall().then((data) => {
         if (data.error) {
-          this.setState({error: data.error})
+          this.setState({error: data.message})
         } else {
           this.setState({allpolls: data })
         }

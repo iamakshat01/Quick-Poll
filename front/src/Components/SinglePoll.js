@@ -38,7 +38,7 @@ class Poll extends Component{
     // fetch a single poll  
     readone(this.props.match.params.pollId).then((polldata) => {
       if (polldata.error) {
-        this.setState({error: polldata.error})
+        this.setState({error: polldata.message})
       } else {
         this.setState({poll: polldata})
       }
@@ -51,7 +51,7 @@ class Poll extends Component{
   {
     readone(this.props.match.params.pollId).then((polldata) => {
       if (polldata.error) {
-        this.setState({error: polldata.error})
+        this.setState({error: polldata.message})
       } else {
         this.setState({poll: polldata})
       }
@@ -76,7 +76,7 @@ class Poll extends Component{
                         () => vote(this.state.poll._id, { answer: option.option })
                               .then((data)=>{
                                 if(data.error)
-                                  this.setState({msg:'',error: data.error})
+                                  this.setState({msg:'',error: data.message})
                                 else
                                   this.setState({error:'', msg: "Your Vote has been successfully recorded"})
                                   this.refresh();
@@ -104,7 +104,7 @@ class Poll extends Component{
     return (
 
       <div className="container mt-5">
-        {this.state.error && <Alert className="col-md-6 mx-auto" color="danger">{this.state.error.message}</Alert>}
+        {this.state.error && <Alert className="col-md-6 mx-auto" color="danger">{this.state.error}</Alert>}
 
         {this.state.msg && <Alert className="col-md-8 mx-auto" color="primary">{this.state.msg}</Alert>}
 
