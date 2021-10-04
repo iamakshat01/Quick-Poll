@@ -1,5 +1,5 @@
 const config = {
-    server: 'http://localhost:3000',
+    server: 'http://secret-falls-21754.herokuapp.com',
     base: 'https://quickpoll.netlify.app',
     
 };
