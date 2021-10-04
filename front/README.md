@@ -1,50 +1,41 @@
-# [Quick-Poll 🔗](https://quickpoll.netlify.app/home)
+# [Quick Poll 🔗](https://quickpoll.netlify.app/)
 
-<!-- ![Landing Page](./readme_assets/1.png) -->
-<!-- ![Navigation](./readme_assets/2.png)
-![Profile](./readme_assets/3.png)
-![Nav Menu](./readme_assets/4.png) -->
+![Landing Page](https://i.ibb.co/mTFM0Lr/Screenshot-from-2021-10-04-18-43-34.png")
+![Poll](https://i.ibb.co/56YSfJL/Screenshot-from-2021-10-04-18-45-43.png)
 
 <br/>
 
 # Project Description
 
-Quick-Poll is a WEB-APP to support quick, easy and real-time polling.
-
-<br/>
-
+Quick-Poll is a WEB-APP to support quick, easy and authenticated polling.
 
 
 # Features Implemented
 
-## 1. Frontend
 
-1.
-   - All Polls and User Polls
+   - Landing Page with Navigation, User and Other Polls 
    - Login/Signup Page
-   - Create Poll Page
-   - Single Poll Page
-   
-2. User Authentication has been integrated into the frontend and backend.
-
-
-
+   - Create Poll 
+   - Single Poll with vote and view responses
+ 
+ 
 # Technologies and Packages Used
 
 ## 1. Frontend
 
 1. React
 2. Reactstrap
-
+3. VictoryJS
 
 ## 2. Backend
 
-1. Node
-2. Express
+1. Node.js
+2. Fastify (Earlier used Express)
 3. MongoDB
 4. Mongoose
-5. JWT
+5. Fastify-JWT
 6. Bcryptjs
+7. Some Fastify-Plugins
 
 <br/>
 
@@ -60,9 +51,9 @@ Clone the frontend and backend repositories, cd into them individually, and then
 ## 2. Backend
 
 1. Run `npm install`.
-2. We used MongoDB Atlas for hosted database, you can have a local database if you want but we recommend using Atlas. If you are using Atlas replace your database link in keys.js file of backend.
-3. Set your JWT secret in env file of backend.
-
-Run `npm start` in the Backend repo first and then `yarn start` in Frontend .
-
-<br/>
+2. Create .env file with following details JWT secret, Database Link and Port
+	- SECRET=' '
+	- DATABASE = ' '
+	- PORT = ' '
+Run `npm start` in the Backend repo first and then in Frontend .
+3. For API details checkout backend repository Readme.
