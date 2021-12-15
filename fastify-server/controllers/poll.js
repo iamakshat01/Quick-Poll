@@ -33,7 +33,7 @@ exports.createPoll = async function (request, reply) {
   const { id } = request.user;
   const { question, options } = request.body;
   try {
-    const user = await db.User.findById(id).lean();
+    const user = await db.User.findById(id);
     const poll = await db.Poll.create({
       question,
       user,
@@ -59,7 +59,7 @@ exports.vote = async function (request, reply) {
   const { answer } = request.body;
   try {
     if (answer) {
-      const poll = await db.Poll.findById(pollId).lean();
+      const poll = await db.Poll.findById(pollId);
       if (!poll) throw new Error('No poll found');
 
       const vote = poll.options.map(
@@ -74,6 +74,7 @@ exports.vote = async function (request, reply) {
       );
       
       if (poll.voted.filter(user => user.toString() === userId).length <= 0) {
+        // console.log(poll);
         poll.voted.push(userId);
         poll.options = vote;
         await poll.save();
@@ -116,14 +117,14 @@ exports.deletePoll = async function (request, reply) {
   const { id: pollId } = request.params;
   const { id: userId } = request.user;
   try {
-    let user = await db.User.findById(userId).lean()
+    let user = await db.User.findById(userId)
     if(user.polls) { 
       user.polls = user.polls.filter(userPoll => {
         return userPoll._id.toString() !== pollId.toString()
       })
     }
     
-    const poll = await db.Poll.findById(pollId).lean();
+    const poll = await db.Poll.findById(pollId);
     if (!poll) throw new Error('No poll found');
     
     if (poll.user.toString() !== userId) {
