@@ -74,6 +74,7 @@ exports.vote = async function (request, reply) {
       );
       
       if (poll.voted.filter(user => user.toString() === userId).length <= 0) {
+        // console.log(poll);
         poll.voted.push(userId);
         poll.options = vote;
         await poll.save();
