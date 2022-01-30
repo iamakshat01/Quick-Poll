@@ -10,7 +10,7 @@ There are two frontend for this project one is React based and other is Next.js 
 
 ### Next.js Repository Frontend Link : (https://github.com/iamakshat01/Quickpoll-Nextjs)
 
-![Landing Page](https://i.ibb.co/P17m9XX/Screenshot-from-2022-01-30-13-18-44.png)
+![Landing Page](https://i.ibb.co/tY7mxjj/Screenshot-from-2022-01-30-13-18-44.png)
 ![Poll Page](https://i.ibb.co/27dmTt1/Screenshot-from-2022-01-30-13-19-55.png)
 
 <br/>
