@@ -1,14 +1,19 @@
-# [Quick Poll 🔗](https://quickpoll.netlify.app/)
-
-![Landing Page](https://i.ibb.co/mTFM0Lr/Screenshot-from-2021-10-04-18-43-34.png")
-![Poll](https://i.ibb.co/56YSfJL/Screenshot-from-2021-10-04-18-45-43.png)
-
-<br/>
+# Quick Poll
 
 # Project Description
 
 Quick-Poll is a WEB-APP to support quick, easy and authenticated polling.
+There are two frontend for this project one is React based and other is Next.js based.
 
+- Next.js Based - (https://quickpoll-one.vercel.app/) 
+- React Based - (https://quickpoll.netlify.app/)
+
+### Next.js Repository Frontend Link : (https://github.com/iamakshat01/Quickpoll-Nextjs)
+
+![Landing Page](https://i.ibb.co/P17m9XX/Screenshot-from-2022-01-30-13-18-44.png)
+![Poll Page](https://i.ibb.co/27dmTt1/Screenshot-from-2022-01-30-13-19-55.png)
+
+<br/>
 
 # Features Implemented
 
@@ -24,8 +29,10 @@ Quick-Poll is a WEB-APP to support quick, easy and authenticated polling.
 ## 1. Frontend
 
 1. React
-2. Reactstrap
-3. VictoryJS
+2. Next.js
+3. TailwindCSS
+4. Reactstrap
+5. VictoryJS
 
 ## 2. Backend
 
