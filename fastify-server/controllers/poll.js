@@ -55,11 +55,10 @@ exports.createPoll = async function (request, reply) {
 // vote for a poll
 exports.vote = async function (request, reply) {
   const { id: pollId } = request.params;
-  const { id: userId } = request.user;
-  const { answer } = request.body;
+  const { userId, answer} = request.body;
   try {
     if (answer) {
-      const poll = await db.Poll.findById(pollId).lean();
+      const poll = await db.Poll.findById(pollId);
       if (!poll) throw new Error('No poll found');
 
       const vote = poll.options.map(
