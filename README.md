@@ -6,7 +6,6 @@ Quick-Poll is a WEB-APP to support quick, easy and authenticated polling.
 There are two frontend for this project one is React based and other is Next.js based.
 
 - Next.js Based - (https://quickpoll-one.vercel.app/) 
-- React Based - (https://quickpoll.netlify.app/)
 
 ### Next.js Repository Frontend Link : (https://github.com/iamakshat01/Quickpoll-Nextjs)
 
