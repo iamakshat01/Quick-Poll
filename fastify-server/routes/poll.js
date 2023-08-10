@@ -29,7 +29,6 @@ function pollRoutes (fastify, options, done) {
     // vote for a specific poll with given id
     fastify.post('/api/polls/:id',{
         type: 'object',
-        preHandler: [fastify.authenticate],
         handler: vote
     })
 
